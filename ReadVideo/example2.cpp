@@ -27,20 +27,23 @@ int main(int argc, char const *argv[])
 		cap >> frame;
 		if( frame.empty() )
 			break;
-		cv::imshow("Example2", frame);
-		logPolar(
-			frame,
-			logpolar_frame,
-			Point2f(
-				frame.cols/2,
-				frame.rows/2
-			),
-			40,
-			WARP_FILL_OUTLIERS
-			);
-		imshow("Logpolar",logpolar_frame);
-		writer << logpolar_frame;
 
+		cv::imshow("Example2", frame);
+		// logPolar(
+		// 	frame,
+		// 	logpolar_frame,
+		// 	Point2f(
+		// 		frame.cols/2,
+		// 		frame.rows/2
+		// 	),
+		// 	40,
+		// 	WARP_FILL_OUTLIERS
+		// 	);
+		
+		// writer << logpolar_frame;
+		cvtColor(frame, logpolar_frame, COLOR_BGR2GRAY);
+		Canny(logpolar_frame, logpolar_frame, 10,100,3,true);
+		imshow("Logpolar",logpolar_frame);
 		if(cv::waitKey(1) >= 0 )
 			break;
 	}	
